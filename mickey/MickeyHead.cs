@@ -13,9 +13,9 @@ public class MickeyHead : IDisposable
         _nose = new SoftwareServo(20);
         _eyes = new SoftwareServo(21);
 
-        _mouth.Calibrate(100, 1000, 2000);
-        _nose.Calibrate(100, 1000, 2000);
-        _eyes.Calibrate(100, 1000, 2000);
+        _mouth.Calibrate(100, 1200, 1950);
+        _nose.Calibrate(100, 1200, 1950);
+        _eyes.Calibrate(100, 1200, 1800);
     }
 
     public void Start()
