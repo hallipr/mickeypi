@@ -1,55 +1,15 @@
-﻿using Iot.Device.ServoMotor;
-using System.Device.Pwm.Drivers;
+﻿namespace MickeyPi.Mickey;
 
-using SoftwarePwmChannel pwmChannel = new(21, 50, usePrecisionTimer: true);
-// Example of hardware PWM using chip 0 and channel 21 on a dev board.
-ServoMotor servoMotor = new ServoMotor(pwmChannel);
-servoMotor.Start();  // Enable control signal.
-
-var stepSize = 100;
-var pulseWidth = 1500; // 1.5ms; Approximately 90 degrees.
-var min = 500;
-var max = 2500;
-
-
-Console.WriteLine($"{pulseWidth} us");
-servoMotor.WritePulseWidth(pulseWidth);
-
-while(true)
+public class Program
 {
-    var key = Console.ReadKey(true);
-    while(Console.KeyAvailable)
+    public static void Main(string[] args)
     {
-        Console.ReadKey(true);
-    }
+        using var head = new MickeyHead();
+        head.Start();
 
-    if(key.Key == ConsoleKey.Escape)
-    {
-        break;
-    }
+        head.SetEyes(0);
+        head.SetEyes(100);
 
-    if(key.Key == ConsoleKey.UpArrow)
-    {
-        pulseWidth = Math.Min(pulseWidth + stepSize, max);
-        Console.WriteLine($"{pulseWidth} us");
-        servoMotor.WritePulseWidth(pulseWidth);
-    }
-    else if(key.Key == ConsoleKey.DownArrow)
-    {
-        pulseWidth = Math.Max(pulseWidth - stepSize, min);
-        Console.WriteLine($"{pulseWidth} us");
-        servoMotor.WritePulseWidth(pulseWidth);
-    }
-    else if(key.Key == ConsoleKey.LeftArrow)
-    {
-        stepSize -= 10;
-        Console.WriteLine($"{stepSize} step");
-    }
-    else if(key.Key == ConsoleKey.RightArrow)
-    {
-        stepSize += 10;
-        Console.WriteLine($"{stepSize} step");
+        head.Stop();
     }
 }
-
-servoMotor.Stop(); // Disable control signal.
