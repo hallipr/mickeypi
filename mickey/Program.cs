@@ -2,7 +2,7 @@
 
 public class Program
 {
-    public static async void Main(string[] args)
+    public static async Task<int> Main(string[] args)
     {
         using var head = new MickeyHead();
         head.Start();
