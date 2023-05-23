@@ -1,4 +1,5 @@
 #!/bin/sh
+pushd /repos/mickeypi
 commit=$(git rev-parse HEAD)
 printf "Local commit $commit\n"
 remotecommit=$(git ls-remote --heads -q | grep -E "[[:space:]]refs/heads/main" | cut -f1)
@@ -15,6 +16,7 @@ if(localcommit != remotecommit)
 then
     printf "Updating...\n"
     git pull
+    chmod +x update.sh
     printf "Updated\n"
 else
     printf "Up to date\n"
