@@ -19,3 +19,10 @@ then
 else
     printf "Up to date\n"
 fi
+
+if(test -n "$pid")
+then
+    printf "Starting Mickey\n"
+    /home/hallipr/.dotnet/dotnet run --project /repos/mickeypi/mickey &
+fi
+```
