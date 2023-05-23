@@ -1,10 +1,11 @@
 #!/bin/sh
-pushd /repos/mickeypi
+BASEDIR=$(dirname $0)
+printf "Script location: $BASEDIR"
+cd $BASEDIR
 commit=$(git rev-parse HEAD)
 printf "$(date +%Y-%m-%d_%H:%M:%S) Local commit $commit\n"
 remotecommit=$(git ls-remote --heads -q | grep -E "[[:space:]]refs/heads/main" | cut -f1)
 printf "$(date +%Y-%m-%d_%H:%M:%S) Remote commit $remotecommit\n"
-
 
 if(localcommit != remotecommit)
 then
@@ -16,7 +17,8 @@ then
   fi
 
   printf "$(date +%Y-%m-%d_%H:%M:%S) Updating...\n"
-  git pull
+  git fetch
+  git reset --hard origin/main
   chmod +x update.sh
   printf "$(date +%Y-%m-%d_%H:%M:%S) Updated\n"
 
