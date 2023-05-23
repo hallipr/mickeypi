@@ -1,13 +1,13 @@
 #!/bin/sh
 BASEDIR=$(dirname $0)
-printf "Script location: $BASEDIR"
+printf "Script location: $BASEDIR\n"
 cd $BASEDIR
 commit=$(git rev-parse HEAD)
 printf "$(date +%Y-%m-%d_%H:%M:%S) Local commit $commit\n"
 remotecommit=$(git ls-remote --heads -q | grep -E "[[:space:]]refs/heads/main" | cut -f1)
 printf "$(date +%Y-%m-%d_%H:%M:%S) Remote commit $remotecommit\n"
 
-if [ "$localcommit" != "$remotecommit" ]; then
+if [ "$commit" != "$remotecommit" ]; then
   pid=$(pgrep mickey)
   if (test -n "$pid"); then
     printf "$(date +%Y-%m-%d_%H:%M:%S) Mickey is running. Shutting it down\n"
@@ -22,7 +22,8 @@ if [ "$localcommit" != "$remotecommit" ]; then
 
   if (test -n "$pid"); then
     printf "$(date +%Y-%m-%d_%H:%M:%S) Starting Mickey\n"
-    /home/hallipr/.dotnet/dotnet run --project /repos/mickeypi/mickey &
+    cd /home/hallipr/repos/mickeypi/mickey
+    /home/hallipr/.dotnet/dotnet run &> ../logs/mickey.log & disown
   fi
 else
     printf "$(date +%Y-%m-%d_%H:%M:%S) Up to date\n"
