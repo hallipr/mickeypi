@@ -22,8 +22,8 @@ if [ "$commit" != "$remotecommit" ]; then
 
   if (test -n "$pid"); then
     printf "$(date +%Y-%m-%d_%H:%M:%S) Starting Mickey\n"
-    cd /home/hallipr/repos/mickeypi/mickey
-    /home/hallipr/.dotnet/dotnet run &> ../logs/mickey.log & disown
+    cd "./mickey"
+    "$HOME/.dotnet/dotnet" run &> ../logs/mickey.log & disown
   fi
 else
     printf "$(date +%Y-%m-%d_%H:%M:%S) Up to date\n"
