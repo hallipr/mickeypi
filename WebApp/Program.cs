@@ -1,8 +1,6 @@
 using System.Text.Json;
-using Microsoft.Extensions.Options;
 
 using MickeyPi.Character;
-using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,19 +11,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-CharacterSettings settings = new();
-builder.Configuration.GetRequiredSection("CharacterSettings").Bind(settings);
-
-builder.Services.AddSingleton(settings);
+var characterSettings = new CharacterSettings();
+builder.Configuration.Bind(nameof(CharacterSettings), characterSettings);
+builder.Services.AddSingleton(characterSettings);
 builder.Services.AddSingleton<CharacterHead>();
 
 var app = builder.Build();
-app.Logger.LogInformation(builder.Configuration.GetDebugView());
 
-var characterSettings = app.Services.GetRequiredService<CharacterSettings>();
-var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
-app.Logger.LogInformation($"\n\n{JsonSerializer.Serialize(settings, jsonOptions)}");
-app.Logger.LogInformation($"\n\n{JsonSerializer.Serialize(app.Services.GetRequiredService<CharacterSettings>(), jsonOptions)}");
+app.Logger.LogInformation(builder.Configuration.GetDebugView());
+app.Logger.LogInformation($"\n\n{JsonSerializer.Serialize(characterSettings)}");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
