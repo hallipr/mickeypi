@@ -1,29 +1,32 @@
-﻿namespace MickeyPi.Mickey;
+using MickeyPi.Character;
 
-public class Program
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var characterSettings = new CharacterSettings();
+builder.Configuration.Bind(nameof(CharacterSettings), characterSettings);
+builder.Services.AddSingleton(characterSettings);
+builder.Services.AddSingleton<CharacterHead>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-  public static async Task<int> Main(string[] args)
-  {
-    using var head = new MickeyHead();
-    head.Start();
-
-    while (true)
-    {
-      for (int i = 0; i <= 100; i++)
-      {
-        head.SetEyes(i);
-        head.SetMouth(i);
-        head.SetNose(i);
-        await Task.Delay(20);
-      }
-
-      for (int i = 100; i >= 0; i--)
-      {
-        head.SetEyes(i);
-        head.SetMouth(i);
-        head.SetNose(i);
-        await Task.Delay(20);
-      }
-    }
-  }
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

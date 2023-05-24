@@ -1,4 +1,6 @@
-# mickey
+# goofy
+
+! ranges unconfirmed
 
 ## Mouth
 Range: 1200 -> 1950

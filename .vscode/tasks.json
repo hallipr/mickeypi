@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/mickey/mickey.csproj",
+                "${workspaceFolder}/mickeypi.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,21 +19,9 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/mickey/mickey.csproj",
+                "${workspaceFolder}/mickeypi.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "watch",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "watch",
-                "run",
-                "--project",
-                "${workspaceFolder}/mickey/mickey.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
