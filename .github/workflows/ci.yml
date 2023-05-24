@@ -37,8 +37,3 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.TOKEN }}
       name: Create GitHub release
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: publish-output
-        path: artifacts/*.tar.gz 
