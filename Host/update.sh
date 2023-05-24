@@ -6,5 +6,11 @@ printf "Latest release: $latestRelease\n"
 
 pushd /var/www
 curl -L "https://github.com/hallipr/mickeypi/releases/download/$latestRelease/webapp.tar.gz" -o ./webapp.tar.gz
+
 rm -rf ./webapp
+mkdir ./webapp
+
 tar -xzf webapp.tar.gz -C ./webapp
+rm ./webapp.tar.gz
+
+chmod +x ./webapp/WebApp

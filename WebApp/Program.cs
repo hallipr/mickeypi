@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 using MickeyPi.Character;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,9 @@ builder.Services.AddSingleton(characterSettings);
 builder.Services.AddSingleton<CharacterHead>();
 
 var app = builder.Build();
+
+app.Logger.LogInformation(builder.Configuration.GetDebugView());
+app.Logger.LogInformation($"\n\n{JsonSerializer.Serialize(characterSettings)}");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
