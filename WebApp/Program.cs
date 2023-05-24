@@ -21,6 +21,9 @@ var app = builder.Build();
 app.Logger.LogInformation(builder.Configuration.GetDebugView());
 app.Logger.LogInformation($"\n\n{JsonSerializer.Serialize(characterSettings)}");
 
+var head = app.Services.GetRequiredService<CharacterHead>();
+head.Start();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
