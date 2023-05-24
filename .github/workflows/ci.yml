@@ -21,6 +21,7 @@ jobs:
     - name: Publish
       run: |
         dotnet publish -c Release
+        mkdir artifacts
         tar -czvf artifacts/mickey.tar.gz mickey/bin/Release/net7.0/linux-arm64/publish/
         tar -czvf artifacts/goofy.tar.gz goofy/bin/Release/net7.0/linux-arm64/publish/
     - name: Upload Artifacts
