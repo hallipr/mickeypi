@@ -3,7 +3,7 @@ using MickeyPi.Character;
 using MickeyPi.Api;
 using System.Net;
 
-namespace MickeyPi.Mickey.Controllers;
+namespace MickeyPi.WebApp.Controllers;
 
 [ApiController]
 [Route("[controller]")]

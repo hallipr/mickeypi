@@ -31,8 +31,7 @@ jobs:
       run: |
         dotnet publish -c Release /p:AssemblyVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.Sha }}
         mkdir artifacts
-        tar -czvf artifacts/mickey.tar.gz Mickey/bin/Release/net7.0/linux-arm64/publish/
-        tar -czvf artifacts/goofy.tar.gz Goofy/bin/Release/net7.0/linux-arm64/publish/
+        tar -czvf artifacts/webapp.tar.gz WebApp/bin/Release/net7.0/linux-arm64/publish/
         tar -czvf artifacts/servoTest.tar.gz ServoTest/bin/Release/net7.0/linux-arm64/publish/
     - run: gh release create ${{ steps.gitversion.outputs.semVer }} artifacts/*.tar.gz
       env:

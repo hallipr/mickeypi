@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RuntimeIdentifier>linux-arm64</RuntimeIdentifier>
-    <RootNamespace>MickeyPi.Mickey</RootNamespace>
+    <RootNamespace>MickeyPi.WebApp</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

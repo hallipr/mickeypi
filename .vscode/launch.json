@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/mickey/bin/Debug/net7.0/mickey.dll",
+            "program": "${workspaceFolder}/WebApp/bin/Debug/net7.0/linux-arm64/WebApp.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/mickey",
+            "cwd": "${workspaceFolder}/WebApp",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
