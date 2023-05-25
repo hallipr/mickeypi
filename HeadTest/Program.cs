@@ -34,6 +34,9 @@ public class Program
 
         var stepSize = 100;
 
+        void AngleUp(SoftwareServo servo) => servo.Angle = Math.Min(servo.MaximumAngle, servo.Angle + stepSize);
+        void AngleDown(SoftwareServo servo) => servo.Angle = Math.Max(0, servo.Angle - stepSize);
+
         while (true)
         {
             var key = Console.ReadKey(true);
@@ -50,28 +53,22 @@ public class Program
             switch(key.Key)
             {
                 case ConsoleKey.A:
-                    head.Mouth.Angle -= stepSize;
-                    Console.WriteLine($"Mouth {head.Mouth.Angle}");
+                    AngleDown(head.Mouth);
                     break;
                 case ConsoleKey.Q:
-                    head.Mouth.Angle += stepSize;
-                    Console.WriteLine($"Mouth {head.Mouth.Angle}");
+                    AngleUp(head.Mouth);
                     break;
                 case ConsoleKey.S:
-                    head.Nose.Angle -= stepSize;
-                    Console.WriteLine($"Nose {head.Nose.Angle}");
+                    AngleDown(head.Nose);
                     break;
                 case ConsoleKey.W:
-                    head.Nose.Angle += stepSize;
-                    Console.WriteLine($"Nose {head.Nose.Angle}");
+                    AngleUp(head.Nose);
                     break;
                 case ConsoleKey.D:
-                    head.Eyelids.Angle -= stepSize;
-                    Console.WriteLine($"Eyelids {head.Eyelids.Angle}");
+                    AngleDown(head.Eyelids);
                     break;
                 case ConsoleKey.E:
-                    head.Eyelids.Angle += stepSize;
-                    Console.WriteLine($"Eyelids {head.Eyelids.Angle}");
+                    AngleUp(head.Eyelids);
                     break;
                 case ConsoleKey.UpArrow:
                     stepSize = Math.Min(100, stepSize + 10);
@@ -84,6 +81,8 @@ public class Program
                 default:
                     break;
             }
+
+            Console.WriteLine($"Mouth {head.Mouth.Angle}, Nose {head.Nose.Angle}, Eyelids {head.Eyelids.Angle}");
         }
 
         head.Stop(); // Disable control signal.
